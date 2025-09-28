@@ -1,0 +1,28 @@
+.max-width {
+    width: 100%;
+    max-width: 800px;
+}
+
+.center {
+    margin: 0 auto;
+    padding: 0;
+}
+
+footer {
+    background-color: rgb(32, 33, 37);
+    border-top: 6px solid transparent;
+    border-image: linear-gradient(to right, #3d65ac, #ef3e39);
+    border-image-slice: 1;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    padding:15px;
+    color: #fff;
+    text-align: center;
+}
+
+footer a, footer a:hover, footer a:active{
+    font-weight: bold;
+    color: #fff;
+}
+
