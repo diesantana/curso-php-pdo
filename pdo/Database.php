@@ -80,10 +80,10 @@ class Database{
 
     /**
      * Retorna o ID do último dado inserido na base de dados 
-     * @return int|string
+     * @return int
      */
-    public function getLastInsertId() :int|string {
-        return $this->connection->lastInsertId();
+    public function getLastInsertId() :int {
+        return (int) $this->connection->lastInsertId();
     }
 
 
