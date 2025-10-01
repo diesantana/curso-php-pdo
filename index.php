@@ -1,3 +1,4 @@
+<?php require_once('actions/getAll.php');?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,15 +48,20 @@
             </thead>
 
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <a href="edit.php?id=" class="btn btn-warning">Editar</a>
-                        <a href="actions/delete.php?id=" class="btn btn-danger" onclick="return confirm('Deseja realmente remover esse cliente?');">Remover</a>
-                    </td>
-                </tr>
+                <!-- Dados dos clientes -->
+                 <?php foreach($listaClientes as $cliente):?>
+                    <tr>
+                        <td><?= $cliente['id']?></td>
+                        <td><?= $cliente['nome']?></td>
+                        <td><?= $cliente['email']?></td>
+                        <td>
+                            <a href="edit.php?id=<?= $cliente['id']?>" class="btn btn-warning">Editar</a>
+                            <a href="actions/delete.php?id=<?= $cliente['id']?>" 
+                                class="btn btn-danger" onclick="return 
+                                confirm('Deseja realmente remover esse cliente?');">Remover</a>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
             </tbody>
         </table>
 

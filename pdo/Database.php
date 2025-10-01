@@ -50,6 +50,35 @@ class Database{
     }
 
     /**
+     * Executa queries SQL que retornam um array de valores
+     * @param string $sql Esqueleto da consulta SQL
+     * @param array $params Parametros da consulta SQL
+     * @return array
+     */
+    public function executeQuery(string $sql, array $params = []) :array {
+        try{
+            // Prepara a consulta SQL
+            $stmt = $this->connection->prepare($sql);
+
+            // Executa a consulta com os parâmetros passados
+            $stmt->execute($params);
+
+            // Retorna os dados 
+            // FetchAll Retorna todos os resultados da query
+            // PDO::FETCH_ASSOC define o formato dos dados retornados da query,
+            // neste caso, um array associativo
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $ex) {
+            // Em caso de erro, captura a exceção e exibe a mensagem de erro
+            echo 'Erro!' . $ex->getMessage();
+            
+            // Retorna um array vazio se houver erro
+            return [];
+        }
+    }
+
+    /**
      * Retorna o ID do último dado inserido na base de dados 
      * @return int|string
      */
