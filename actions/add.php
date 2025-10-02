@@ -9,8 +9,7 @@ $email = $_POST['txtEmail'] ?? null;
 
 // Verifica se os dados são válidos
 if (empty(trim($nome)) || empty(trim($email))) {
-    echo 'Os dados fornecidos são inválidos';
-    return;
+    die('Os dados fornecidos são inválidos');
 }
 
 // Monta o esqueleto da constulta SQL
@@ -30,8 +29,7 @@ $result = $pdo->executeNonQuery($sql, $params);
 
 // Se a ação falhar, exibe uma mensagem para o usuário 
 if(!$result) {
-    echo 'Houve um erro ao tentar inserir um novo cliente';
-    return;
+    die('Houve um erro ao tentar inserir um novo cliente');
 }
 
 // Se a ação foi concluída com sucesso, armazena o id do usuário inserido

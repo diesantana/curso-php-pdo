@@ -3,13 +3,12 @@
 require_once('utils/functions.php');
 require_once('pdo/Database.php');
 
-// Busca os id enviado pela URL (método GET)
+// Busca o id enviado pela URL (método GET)
 $id = $_GET['id'] ?? null;
 
 // Verifica se o id é válido
 if(empty($id) || $id <= 0) {
-    echo 'Id do cliente não identificado';
-    return;
+    die('Id do cliente não identificado');
 }
 
 // Cria uma instância da classe de conexão

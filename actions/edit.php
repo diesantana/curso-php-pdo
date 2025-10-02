@@ -10,13 +10,12 @@ $id = $_GET['id'] ?? null;
 
 // Verifica se os dados são válidos
 if (empty(trim($nome)) || empty(trim($email)) || empty($id) || $id <= 0) {
-    echo 'Os dados fornecidos são inválidos';
-    return;
+    die('Os dados fornecidos são inválidos');
 }
 
 // Monta o esqueleto da constulta SQL
-// NUNCA ESQUEÇA DE UTILIZAR WHERE EM UPDATES OU DELETE
 $sql = 'UPDATE cliente SET nome = :nome, email = :email WHERE id = :id';
+// NUNCA ESQUEÇA DE UTILIZAR WHERE EM UPDATES OU DELETE
 
 // Define os parâmetros (valores reais que substituirãos os parametros na consulta)
 $params = [
@@ -35,8 +34,7 @@ $result = $pdo->executeNonQuery($sql, $params);
 
 // Se a ação falhar, exibe uma mensagem para o usuário 
 if(!$result) {
-    echo 'Houve um erro ao tentar Atualizar um novo cliente';
-    return;
+    die('Houve um erro ao tentar Atualizar um novo cliente');
 }
 
 // Após concluir a ação, redireciona novamente para a página de Editar, passando o id nos parâmetros da URL
