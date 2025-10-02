@@ -57,8 +57,7 @@
                         <td>
                             <a href="edit.php?id=<?= $cliente['id']?>" class="btn btn-warning">Editar</a>
                             <a href="actions/delete.php?id=<?= $cliente['id']?>" 
-                                class="btn btn-danger" onclick="return 
-                                confirm('Deseja realmente remover esse cliente?');">Remover</a>
+                                class="btn btn-danger" onclick="confirm('Deseja realmente remover esse cliente?');">Remover</a>
                         </td>
                     </tr>
                 <?php endforeach;?>
