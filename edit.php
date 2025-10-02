@@ -50,6 +50,13 @@
             <button type="submit" class="btn btn-success">Editar</button>
         </form>
 
+        <?php
+            $msg = $_GET['msg'] ?? false;
+            if($msg):
+        ?>
+        <div class="alert alert-success"><?= $msg?></div>
+        <?php endif;?>
+
     </section>
 
     <footer>
