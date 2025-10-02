@@ -64,10 +64,39 @@ class Database{
             $stmt->execute($params);
 
             // Retorna os dados 
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
             // FetchAll Retorna todos os resultados da query
             // PDO::FETCH_ASSOC define o formato dos dados retornados da query,
             // neste caso, um array associativo
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $ex) {
+            // Em caso de erro, captura a exceção e exibe a mensagem de erro
+            echo 'Erro!' . $ex->getMessage();
+            
+            // Retorna um array vazio se houver erro
+            return [];
+        }
+    }
+
+    /**
+     * Executa queries SQL que retornam um único registro
+     * @param string $sql Esqueleto da consulta SQL
+     * @param array $params Parametros da consulta SQL
+     * @return array
+     */
+    public function executeQueryOneRow(string $sql, array $params = []) :array {
+        try{
+            // Prepara a consulta SQL
+            $stmt = $this->connection->prepare($sql);
+
+            // Executa a consulta com os parâmetros passados
+            $stmt->execute($params);
+
+            // Retorna os dados 
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+            // Fetch Retorna a primeira ocorrência da query
+            // PDO::FETCH_ASSOC define o formato dos dados retornados da query,
+            // neste caso, um array associativo
 
         } catch (PDOException $ex) {
             // Em caso de erro, captura a exceção e exibe a mensagem de erro

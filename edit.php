@@ -1,3 +1,4 @@
+<?php require_once('actions/getById.php');?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -36,18 +37,19 @@
         <h1>Editar cliente</h1>
         <hr>
 
-        <form action="actions/edit.php?id=" method="post">
+        <form action="actions/edit.php?id=<?= $cliente['id'] ?? null?>" method="post">
             <div class="mb-3">
                 <label for="txtNome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="txtNome" name="txtNome" value="">
+                <input type="text" class="form-control" id="txtNome" name="txtNome" value="<?= $cliente['nome'] ?? null?>">
             </div>
             <div class="mb-3">
                 <label for="txtEmail" class="form-label">E-mail</label>
-                <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="">
+                <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="<?= $cliente['email'] ?? null?>">
             </div>
 
             <button type="submit" class="btn btn-success">Editar</button>
         </form>
+
     </section>
 
     <footer>

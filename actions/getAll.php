@@ -3,7 +3,7 @@
 require_once('utils/functions.php');
 require_once('pdo/Database.php');
 
-// Cria da classe de conexão
+// Cria uma instância da classe de conexão
 $pdo = new Database();
 
 // Cria a query SQL
