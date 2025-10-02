@@ -36,4 +36,4 @@ if(!$result) {
 $id = $pdo->getLastInsertId();
 
 // Após concluir a ação, redireciona para a página de Editar, passando o id nos parâmetros da URL
-redirect('../edit.php/?id='. $id);
+redirect('/pdo-satellasoft/edit.php?id='. $id);

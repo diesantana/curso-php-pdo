@@ -39,4 +39,4 @@ if(!$result) {
 
 // Após concluir a ação, redireciona novamente para a página de Editar, passando o id nos parâmetros da URL
 // e uma mensagem de sucesso
-redirect('../edit.php/?id='. $id . '&msg="Dados atualizados com sucesso"');
+redirect('/pdo-satellasoft/edit.php?id='. $id . '&msg="Dados atualizados com sucesso"');
