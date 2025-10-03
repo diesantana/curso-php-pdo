@@ -3,14 +3,16 @@ require_once('Config.php');
 /**
  * Classe responsável pela comunicação com a base de dados
  */
-class Database{
+class Database
+{
     private ?PDO $connection = null; // Este atributo vai armazenar a conexão atual com a base de dados
 
     /**
      * Método construtor que inicializa a propriedade connection
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->connection = $this->getConnection();
     }
 
@@ -24,17 +26,27 @@ class Database{
      * 
      * @return PDO
      */
-    public function getConnection() :PDO {
-        if($this->connection !== null) $this->connection; 
-        return new PDO(DSN, USER, PASSWORD);
+    public function getConnection(): PDO
+    {
+        if ($this->connection !== null) {
+            return $this->connection;
+        }
+
+        $options = [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // erros como exceções
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // arrays associativos por padrão
+            PDO::ATTR_EMULATE_PREPARES   => false,                  // prepared statements nativos
+        ];
+        return new PDO(DSN, USER, PASSWORD, $options);
     }
 
     /**
      * Executa queries que não retornam nenhum dado (INSERT, UPDATE, DELETE)
      * @return bool
      */
-    public function executeNonQuery(string $sql, array $params = []) :bool {
-        try{
+    public function executeNonQuery(string $sql, array $params = []): bool
+    {
+        try {
             // Prepara a consulta SQL
             $stmt = $this->connection->prepare($sql);
 
@@ -43,7 +55,7 @@ class Database{
         } catch (PDOException $ex) {
             // Em caso de erro, captura a exceção e exibe a mensagem de erro
             echo 'Erro!' . $ex->getMessage();
-            
+
             // Retorna false se houver erro
             return false;
         }
@@ -55,8 +67,9 @@ class Database{
      * @param array $params Parametros da consulta SQL
      * @return array
      */
-    public function executeQuery(string $sql, array $params = []) :array {
-        try{
+    public function executeQuery(string $sql, array $params = []): array
+    {
+        try {
             // Prepara a consulta SQL
             $stmt = $this->connection->prepare($sql);
 
@@ -64,15 +77,13 @@ class Database{
             $stmt->execute($params);
 
             // Retorna os dados 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll();
             // FetchAll Retorna todos os resultados da query
-            // PDO::FETCH_ASSOC define o formato dos dados retornados da query,
-            // neste caso, um array associativo
 
         } catch (PDOException $ex) {
             // Em caso de erro, captura a exceção e exibe a mensagem de erro
             echo 'Erro!' . $ex->getMessage();
-            
+
             // Retorna um array vazio se houver erro
             return [];
         }
@@ -84,8 +95,9 @@ class Database{
      * @param array $params Parametros da consulta SQL
      * @return array
      */
-    public function executeQueryOneRow(string $sql, array $params = []) :array {
-        try{
+    public function executeQueryOneRow(string $sql, array $params = []): array
+    {
+        try {
             // Prepara a consulta SQL
             $stmt = $this->connection->prepare($sql);
 
@@ -93,15 +105,13 @@ class Database{
             $stmt->execute($params);
 
             // Retorna os dados 
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetch();
             // Fetch Retorna a primeira ocorrência da query
-            // PDO::FETCH_ASSOC define o formato dos dados retornados da query,
-            // neste caso, um array associativo
 
         } catch (PDOException $ex) {
             // Em caso de erro, captura a exceção e exibe a mensagem de erro
             echo 'Erro!' . $ex->getMessage();
-            
+
             // Retorna um array vazio se houver erro
             return [];
         }
@@ -111,9 +121,8 @@ class Database{
      * Retorna o ID do último dado inserido na base de dados 
      * @return int
      */
-    public function getLastInsertId() :int {
+    public function getLastInsertId(): int
+    {
         return (int) $this->connection->lastInsertId();
     }
-
-
 }
